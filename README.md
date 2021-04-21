@@ -1,6 +1,6 @@
 # Google Personal/Shared Drive Index 
 
-[![](https://data.jsdelivr.com/v1/package/gh/ParveenBhadooOfficial/Bhadoo-Drive-Index/badge)](https://www.jsdelivr.com/package/gh/ParveenBhadooOfficial/Bhadoo-Drive-Index) [![](https://data.jsdelivr.com/v1/package/gh/ParveenBhadooOfficial/Google-Drive-Index/badge)](https://www.jsdelivr.com/package/gh/ParveenBhadooOfficial/Google-Drive-Index) [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FParveenBhadooOfficial%2FGoogle-Drive-Index&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
+[![](https://data.jsdelivr.com/v1/package/gh/ParveenBhadooOfficial/Bhadoo-Drive-Index/badge)](https://www.jsdelivr.com/package/gh/ParveenBhadooOfficial/Bhadoo-Drive-Index) [![](https://data.jsdelivr.com/v1/package/gh/ParveenBhadooOfficial/Google-Drive-Index/badge)](https://www.jsdelivr.com/package/gh/ParveenBhadooOfficial/Google-Drive-Index) [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FParveenBhadooOfficial%2FGoogle-Drive-Index&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://github.com/ParveenBhadooOfficial/Google-Drive-Index)
 
 ## Full Whitelabel and Customizable Index | One of a kind
 
@@ -47,34 +47,60 @@
 ## Basic Config
 
 ````
-"roots": [{
-    "id": "root", // shared drive id or folder id
-    "name": "Cloud Zero", // name for drive
-    "user": "admin", // username for id pass
-    "pass": "admin", // password for id pass (works also if their is no username, keep blank if no auth is needed.
-    "protect_file_link": true // protects the direct links when true.
-}],
+    "roots": 
+	    [
+
+	    {
+	    "id": "",
+            "name": "Drive One",
+            "user": "",
+            "pass": "",
+            "protect_file_link": false
+            }
+
+            ],
 ````
 
 ## Multiple ID Config
 
+* Add this code for each drive. see cloudflare workers code for more info. (requires common sense)
+
 ````
-"roots": [{
-        "id": "root", // shared drive id or folder id
-        "name": "Cloud Zero", // name for drive
-        "user": "admin", // username for id pass
-        "pass": "admin", // password for id pass (works also if their is no username, keep blank if no auth is needed.
-        "protect_file_link": true // protects the direct links when true.
-    },
-    {
-        "id": "root", // shared drive id or folder id
-        "name": "Cloud Zero", // name for drive
-        "user": "admin", // username for id pass
-        "pass": "admin", // password for id pass (works also if their is no username, keep blank if no auth is needed.
-        "protect_file_link": true // protects the direct links when true.
-    }
-],
+            ,
+            {
+            "id": "",
+            "name": "Drive Two",
+            "user": ["user1", "user2"],
+            "pass": ["pass1", "pass2"],
+            "protect_file_link": false
+            }
 ````
+
+## Multiple Users Password
+
+* For single user
+
+````
+            "user": "yourusername",
+            "pass": "yourpassword",
+````
+
+* For multiple users (upto 5 users)
+
+````
+            "user": ["user1", "user2"],
+            "pass": ["pass1", "pass2"],
+````
+
+* where `user1:pass1` and `user2:pass2` are combinations.
+* if users adds `"user": ["", ""],` empty values but more than one empty value then the site will ask for authentication but user can enter without entering any data by clicking submit.
+
+## Use of .password File
+
+* This is directory encryption added by the original author.
+* Add a .password file your required password in your folder which you want to protect, each folder should have its own .password file.
+* The password is stored inside the Google Drive Folder, not the index and the .password file is hidden an cannot be accessed using Index.
+* Example use https://bit.ly/3tBxXJN and password is `thispassword`
 
 ## Brand Customization and Dark Mode
 
@@ -84,32 +110,40 @@
 * You can remove credit option but we request you not to.
 * See Below code to understand Customization.
 
-
 ````
 const uiConfig = {
-	"theme": "dark", // switch between themes, default set to dark, select from https://github.com/ParveenBhadooOfficial/Google-Drive-Index#themes
-	"dark_mode": true, // incase you're viewing wrong colors try switching this
-	"version": "2.0.15", // don't touch this one. get latest code using generator at https://github.com/ParveenBhadooOfficial/Bhadoo-Drive-Index
-	"logo_image": true, // true if you're using image link in next option.
-	"logo_height": "", // only if logo_image is true
-	"logo_width": "100px", // only if logo_image is true
-	"logo_link_name": "https://cdn.jsdelivr.net/gh/jscdn/svg@1.0.3/bhadoo-cloud-logo-white.svg", // if logo is true then link otherwise just text for name
-	"contact_link": "https://t.telegram.ind.in/BhadooCloud", // Link to Contact Button on Menu
-	"copyright_year": "2050", // year of copyright, can be anything like 2015 - 2020 or just 2020
-	"company_name": "Bhadoo Cloud", // Name next to copyright
-	"company_link": "https://t.telegram.ind.in/BhadooCloud", // link of copyright name
-	"credit": true, // Set this to true to give us credit
-	"display_size": true, // Set this to false to hide display file size
-	"display_time": false, // Set this to false to hide display modified time for folder and files
-        "disable_player": false, // Set this to true to hide audio and video players
-	"poster": "https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index@2.0.10/images/poster.jpg", // Video poster URL or see Readme to how to load from Drive
-	"audioposter": "https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index@2.0.10/images/music.jpg", // Video poster URL or see Readme to how to load from Drive
-	"jsdelivr_cdn_src": "https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index", // If Project is Forked, then enter your Github repo
-	"render_head_md": true, // Render Head.md
-	"render_readme_md": true, // Render Readme.md
-	"plyr_io_version": "3.6.4" // Change plyr.io version in future when needed.
+    "theme": "dark", // switch between themes, default set to dark, select from https://github.com/ParveenBhadooOfficial/Google-Drive-Index#themes
+    "dark_mode": true, // incase you're viewing wrong colors try switching this
+    "version": "2.0.15", // don't touch this one. get latest code using generator at https://github.com/ParveenBhadooOfficial/Bhadoo-Drive-Index
+    "logo_image": true, // true if you're using image link in next option.
+    "logo_height": "", // only if logo_image is true
+    "logo_width": "100px", // only if logo_image is true
+    "logo_link_name": "https://cdn.jsdelivr.net/gh/jscdn/svg@1.0.3/bhadoo-cloud-logo-white.svg", // if logo is true then link otherwise just text for name
+    "contact_link": "https://t.telegram.ind.in/BhadooCloud", // Link to Contact Button on Menu
+    "copyright_year": "2050", // year of copyright, can be anything like 2015 - 2020 or just 2020
+    "company_name": "Bhadoo Cloud", // Name next to copyright
+    "company_link": "https://t.telegram.ind.in/BhadooCloud", // link of copyright name
+    "credit": true, // Set this to true to give us credit
+    "display_size": true, // Set this to false to hide display file size
+    "display_time": false, // Set this to false to hide display modified time for folder and files
+    "disable_player": false, // Set this to true to hide audio and video players
+    "poster": "https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index@2.0.10/images/poster.jpg", // Video poster URL or see Readme to how to load from Drive
+    "audioposter": "https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index@2.0.10/images/music.jpg", // Video poster URL or see Readme to how to load from Drive
+    "jsdelivr_cdn_src": "https://cdn.jsdelivr.net/gh/ParveenBhadooOfficial/Google-Drive-Index", // If Project is Forked, then enter your Github repo
+    "render_head_md": true, // Render Head.md
+    "render_readme_md": true, // Render Readme.md
+    "plyr_io_version": "3.6.4", // Change plyr.io version in future when needed.
+    "unauthorized_owner_link": "https://i.telegram.ind.in/TheFirstSpeedster", // Unauthorized Error Page Link to Owner
+    "unauthorized_owner_email": "admin@hashhackers.com", // Unauthorized Error Page Owner Email
+    "enable_arc": true, // If you want to use arc.io
+    "arc_code": "jfoY2h19" // arc.io Integraion Code, get yours from https://portal.arc.io
 }
 ````
+
+## arc.io Integration
+
+* Signup at arc.io
+* Add your site and enable arc in Customization with your code.
 
 ## Themes
 
@@ -143,6 +177,27 @@ const uiConfig = {
 * Change jsDelivr CDN URL and version code in `workers-beta.js`.
 * Deploy in Cloudflare Workers.
 
+## Get Google_Client_ID and Secret and Generate Token
+
+* Open [Google Dev Credentials Site](https://console.developers.google.com/apis/credentials).
+* Create a Project, name as you like.
+* Enable [Drive API](https://console.developers.google.com/apis/library/drive.googleapis.com)
+* In [Credentials Page](https://console.developers.google.com/apis/credentials) Click `Create Credentials` and then Click `OAuth Client ID`.
+* Click Configure Consent Screen.
+* Select External.
+* Fill your APP Details
+* Select Scope as `https://www.googleapis.com/auth/drive` (wait few hours if Google Drive is not showing up if you've just enabled the scope) or
+* You can also enter manual scope `https://www.googleapis.com/auth/drive` and click on add to table and then save or update.
+* Proceed with Save and Continue.
+* Add your email id you want to use as test user, upto 100 emails maximum. (Because you are not verified)
+* In [Credentials Page](https://console.developers.google.com/apis/credentials) Click `Create Credentials` and then Click `OAuth Client ID`.
+* Select Desktop App.
+* Now you have your own CLIENT ID and CLIENT SECRET.
+* Copy your details and save for future use.
+* Copy [this](https://github.com/ParveenBhadooOfficial/Google-Drive-Index/blob/master/worker/worker-generator.js) code.
+* Replace Line 6 and 7 with your own CLIENT ID and CLIENT SECRET.
+* Paste this code in Cloudflare Workers and follow the site.
+
 ## Upcoming Changes
 
 * Icons from other Index for better view.
@@ -174,4 +229,3 @@ const uiConfig = {
 * ETH `0xaf25cdc7967213172a745453a64e8a0b59686729`
 * BTC `3BgSznxLB5u4WiuVERb1dKWeTqSSwK9NPW`
 * BAT `0xaf25cdc7967213172a745453a64e8a0b59686729`
-
